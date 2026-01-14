@@ -108,7 +108,12 @@ server.registerTool(
     },
   },
   async ({ base_id, table_name, fields_json }) => {
-    const fields = JSON.parse(fields_json);
+    let fields;
+    try {
+      fields = JSON.parse(fields_json);
+    } catch (e) {
+      throw new Error(`Invalid JSON in fields_json: ${e.message}`);
+    }
     const data = await airtableRequest(
       `/${base_id}/${encodeURIComponent(table_name)}`,
       {
@@ -135,7 +140,12 @@ server.registerTool(
     },
   },
   async ({ base_id, table_name, record_id, fields_json }) => {
-    const fields = JSON.parse(fields_json);
+    let fields;
+    try {
+      fields = JSON.parse(fields_json);
+    } catch (e) {
+      throw new Error(`Invalid JSON in fields_json: ${e.message}`);
+    }
     const data = await airtableRequest(
       `/${base_id}/${encodeURIComponent(table_name)}/${record_id}`,
       {
