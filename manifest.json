@@ -1,0 +1,29 @@
+{
+  "manifest_version": "0.3",
+  "name": "airtable",
+  "version": "1.0.1",
+  "description": "Connect Claude to your Airtable bases - list, create, and update records",
+  "author": {
+    "name": "ldraney",
+    "url": "https://github.com/ldraney/airtable-mcp-server"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/index.js"],
+      "env": {
+        "AIRTABLE_API_KEY": "${user_config.api_key}"
+      }
+    }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "Airtable API Key",
+      "description": "Your Airtable Personal Access Token (get it at airtable.com/create/tokens)",
+      "required": true
+    }
+  }
+}
